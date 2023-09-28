@@ -8,7 +8,8 @@ public class Ship {
         position[0][0] = posStartX;
         position[0][1] = posStartY;
         for (int i = 1; i < length; i++) {
-
+            position[i][0] = posStartX + i*(Boolean.compare(orientation == "WEST", true)) - i*(Boolean.compare(orientation == "EAST", true));
+            position[i][1] = posStartY + i*(Boolean.compare(orientation == "SOUTH", true)) - i*(Boolean.compare(orientation == "NORTH", true));
         }
     }
 }
