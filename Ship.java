@@ -27,9 +27,26 @@ public class Ship {
         for (int l = 0; l < length; l++) {
                 counter += position[l][2];
             }
-        }
 
         if (counter == length) {
-            boolean sunk = true;
+            sunk = true;
         }
     }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getStatus(int x, int y) {
+        for (int m = 0; m < length; m++) {
+            if (position[m][0] == x && position[m][1] == y) {
+                return position[m][2];
+            }
+        }
+        return -1; // no ships match up with called arguments
+    }
+
+    public boolean getSunk() {
+        return sunk;
+    }
+}
