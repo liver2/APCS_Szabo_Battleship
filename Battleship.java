@@ -37,7 +37,6 @@ public class Battleship {
         scan.nextLine(); // To clear the new line created after scanning an int
         do {
             orientation = scan.nextLine();
-            /* For debugging: */ System.out.println(shipPlacementCheck(x, y, len, orientation));
         } while (!(orientation.equals("n") || orientation.equals("s") || orientation.equals("e") || orientation.equals("w")) 
                  || 
                  !(shipPlacementCheck(x, y, len, orientation) == true));
@@ -58,8 +57,8 @@ public class Battleship {
         pos[0][0] = x;
         pos[0][1] = y;
         for (int i = 0; i < len; i++) {
-            pos[i][0] = x + i*(Boolean.compare(orientation == "w", true)) - i*(Boolean.compare(orientation == "e", true));
-            pos[i][1] = y + i*(Boolean.compare(orientation == "s", true)) - i*(Boolean.compare(orientation == "n", true));
+            pos[i][0] = x + i*(Boolean.compare(orientation == "n", true)) - i*(Boolean.compare(orientation == "s", true));
+            pos[i][1] = y + i*(Boolean.compare(orientation == "e", true)) - i*(Boolean.compare(orientation == "w", true));
         }
 
         for (int i = 0; i < len; i++) {

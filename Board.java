@@ -12,15 +12,15 @@ public class Board {
     public void printBoard () {
         System.out.println("   1 2 3 4 5 6 7 8 9 10");
         
-        for (int a = 1; a <= 10; a++) {
+        for (int b = 1; b <= 10; a++) {
             if (a < 10) {
                 System.out.print(a + "  ");
             } else {
                 System.out.print(a + " ");
             }
 
-            for (int b = 0; b < 10; b++) {
-                System.out.print(indicators[a-1][b] + " ");
+            for (int a = 0; a < 10; b++) {
+                System.out.print(indicators[a][b-1] + " ");
             }
 
             System.out.println("");
