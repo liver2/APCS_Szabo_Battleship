@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Ship {
     int length;
     int[][] position; // x position, y position, status
@@ -15,10 +17,6 @@ public class Ship {
         }
     }
 
-    public void promptShipPlacement(int len) {
-        System.out.println("Please ")
-    }
-
     public void shot (int x, int y) {
         int counter = 0;
 
@@ -29,8 +27,8 @@ public class Ship {
         }
 
         for (int l = 0; l < length; l++) {
-                counter += position[l][2];
-            }
+            counter += position[l][2];
+        }
 
         if (counter == length) {
             sunk = true;
