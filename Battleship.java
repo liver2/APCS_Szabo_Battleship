@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Battleship {
+    Board pBoard = new Board(); // Player Board
+    Board cBoard = new Board(); // Computer Board
+
     public static void promptShipPlacement(int len) {
         Scanner scan = new Scanner(System.in);
         int x;
@@ -29,7 +32,11 @@ public class Battleship {
 
         System.out.println("Let's see your ship on the board...\n");
 
-
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < 1; j++) {
+                pBoard.setIndicator();
+            }
+        }
     }
 
     public static boolean shipPlacementCheck(int x, int y, int len, String orientation) {
@@ -52,9 +59,6 @@ public class Battleship {
         return true;
     }
     public static void main(String[] args) {
-        Board pBoard = new Board(); // Player Board
-        Board cBoard = new Board(); // Computer Board
-
         System.out.println("--- Battleship ---");
 
         System.out.println("Welcome to Battleship!");
@@ -65,7 +69,7 @@ public class Battleship {
 
         System.out.println("As you may know, you will have to place five ships.");
         System.out.println("These five ships have lengths 2, 3, 3, 4, and 5.");
-        System.out.println("Let's begin placing ships.\n")
+        System.out.println("Let's begin placing ships.\n");
 
         promptShipPlacement(2);
         promptShipPlacement(3);
