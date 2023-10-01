@@ -18,6 +18,7 @@ public class Battleship {
 
     public static void promptShipPlacement(int len, Board board, Ship ship, String ind) {
         Scanner scan = new Scanner(System.in);
+        Scanner strScan = new Scanner(System.in);
         int x;
         int y;
         String orientation;
@@ -27,19 +28,18 @@ public class Battleship {
             x = scan.nextInt();
         } while (!(x >= 0 && x <= 10));
 
-        System.out.println("Please specify a Y coordinate for your ship with length " + len + ".");
         do {
+            System.out.println("Please specify a Y coordinate for your ship with length " + len + ".");
             y = scan.nextInt();
         } while (!(y >= 0 && y <= 10));
 
-        System.out.println("Please specify an orientation for your ship with length " + len + ".");
-        System.out.println("Specify north with n, south with s, east with e, and west with w.");
-        scan.nextLine(); // To clear the new line created after scanning an int
         do {
-            orientation = scan.nextLine();
+            System.out.println("Please specify an orientation for your ship with length " + len + ".");
+            System.out.println("Specify north with n, south with s, east with e, and west with w.");
+            orientation = strScan.nextLine();
         } while (!(orientation.equals("n") || orientation.equals("s") || orientation.equals("e") || orientation.equals("w")) 
                  || 
-                 !(shipPlacementCheck(x, y, len, orientation) == true));
+                 !(shipPlacementCheck(x, y, len, orientation) == true)); // not working properly
 
         System.out.println("Let's see your ship on the board...\n");
 
@@ -58,12 +58,12 @@ public class Battleship {
         pos[0][1] = y;
         for (int i = 0; i < len; i++) {
             pos[i][0] = x + i*(Boolean.compare(orientation.equals("e"), true)) - i*(Boolean.compare(orientation.equals("w"), true));
-            pos[i][1] = y + i*(Boolean.compare(orientation.equals("n"), true)) - i*(Boolean.compare(orientation.equals("s"), true));
+            pos[i][1] = y + i*(Boolean.compare(orientation.equals("s"), true)) - i*(Boolean.compare(orientation.equals("n"), true));
         }
 
         for (int i = 0; i < len; i++) {
-            for (int j = 0; j < 1; j++) {
-                if (pos[i][j] > 10 || pos[i][j] < 0) {
+            for (int j = 0; j < 2; j++) {
+                if (pos[i][j] > 10 || pos[i][j] < 1) {
                     return false;
                 }
             }
