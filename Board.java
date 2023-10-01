@@ -25,6 +25,8 @@ public class Board {
 
             System.out.println("");
         }
+
+        System.out.println("");
     }
 
     public void setIndicator (int x, int y, String ind) {
