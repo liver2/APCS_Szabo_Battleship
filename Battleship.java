@@ -57,8 +57,8 @@ public class Battleship {
         pos[0][0] = x;
         pos[0][1] = y;
         for (int i = 0; i < len; i++) {
-            pos[i][0] = x + i*(Boolean.compare(orientation == "n", true)) - i*(Boolean.compare(orientation == "s", true));
-            pos[i][1] = y + i*(Boolean.compare(orientation == "e", true)) - i*(Boolean.compare(orientation == "w", true));
+            pos[i][0] = x + i*(Boolean.compare(orientation.equals("e"), true)) - i*(Boolean.compare(orientation.equals("w"), true));
+            pos[i][1] = y + i*(Boolean.compare(orientation.equals("n"), true)) - i*(Boolean.compare(orientation.equals("s"), true));
         }
 
         for (int i = 0; i < len; i++) {

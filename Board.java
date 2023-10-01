@@ -13,7 +13,7 @@ public class Board {
         System.out.println("   1 2 3 4 5 6 7 8 9 10");
         
         for (int b = 1; b <= 10; b++) {
-            if (a < 10) {
+            if (b < 10) {
                 System.out.print(b + "  ");
             } else {
                 System.out.print(b + " ");
