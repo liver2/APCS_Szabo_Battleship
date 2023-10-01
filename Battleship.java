@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Battleship {
-    Board pBoard = new Board(); // Player Board
-    Board cBoard = new Board(); // Computer Board
+    static Board pBoard = new Board(); // Player Board
+    static Board cBoard = new Board(); // Computer Board
 
     public static void promptShipPlacement(int len) {
         Scanner scan = new Scanner(System.in);
