@@ -34,11 +34,11 @@ public class Battleship {
 
         System.out.println("Please specify an orientation for your ship with length " + len + ".");
         System.out.println("Specify north with n, south with s, east with e, and west with w.");
+        scan.nextLine(); // To clear the new line created after scanning an int
         do {
-            scan.nextLine(); // To clear the new line created after scanning an int
             orientation = scan.nextLine();
             /* For debugging: */ System.out.println(shipPlacementCheck(x, y, len, orientation));
-        } while (!(orientation == "n" || orientation == "s" || orientation == "e" || orientation == "w") 
+        } while (!(orientation.equals("n") || orientation.equals("s") || orientation.equals("e") || orientation.equals("w")) 
                  || 
                  !(shipPlacementCheck(x, y, len, orientation) == true));
 
