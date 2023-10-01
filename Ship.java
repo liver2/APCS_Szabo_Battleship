@@ -15,6 +15,10 @@ public class Ship {
         }
     }
 
+    public void promptShipPlacement(int len) {
+        System.out.println("Please ")
+    }
+
     public void shot (int x, int y) {
         int counter = 0;
 

@@ -11,6 +11,8 @@ public class Battleship {
 
         pBoard.printBoard();
 
-        System.out.println("hi");
+        System.out.println("As you may know, you will have to place five ships.");
+        System.out.println("These five ships have lengths 2, 3, 3, 4, and 5.");
+        
     }
 }
