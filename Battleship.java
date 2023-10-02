@@ -3,6 +3,18 @@ import java.util.Scanner;
 public class Battleship {
     static Scanner scanNum = new Scanner(System.in);
     static Scanner scanString = new Scanner(System.in);
+
+    public static void normalGame() {
+        Board p1Board = new Board(10);
+        Board p1Guess = new Board(10);
+        Board p2Board = new Board(10);
+        Board p2Guess = new Board(10);
+    }
+
+    public static void fastGame() {
+        Board aiBoard = new Board(8);
+        Board pGuess = new Board(8);
+    }
     public static void main(String[] args) {
         String s1;
 
@@ -11,7 +23,7 @@ public class Battleship {
         System.out.println("For this version of Battleship, you can choose 2 modes: Fast and Regular.");
         System.out.println("Let me explain the rules.\n"); // Places new line
         System.out.println("In Regular mode, you and a friend will each place 5 ships on a 10x10 board.");
-        System.out.println("The ships will be lengths 2, 3, 3, 4, and 5.")
+        System.out.println("The ships will be lengths 2, 3, 3, 4, and 5.");
         System.out.println("Ships cannot be placed diagonally; only horizontally and vertically. They cannot extend off the board.");
         System.out.println("Then, you and your friend will take turns guessing the positions of each others' ships.");
         System.out.println("You will know when you hit a ship, and you will know when a complete ship has been sunk.");
