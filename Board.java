@@ -1,10 +1,40 @@
 public class Board {
+    String[][] indicators;
+    int s;
+    
     public Board(int side) {
-        char[][] ind = new char[side][side];
-        for (int i = 0; i < side; i++) {
-            for (int j = 0; j < side; j++) {
-                ind[i][j] = '.';
+        s = side;
+
+        for (int c = 0; c < s; c++) {
+            for (int d = 0; d < s; d++) {
+                indicators[c][d] = ".";
             }
         }
+
+        String[][] indicators = new String[s][s];
+    }
+
+    public void printBoard () {
+        System.out.println("   1 2 3 4 5 6 7 8 9 10");
+        
+        for (int b = 1; b <= s; b++) {
+            if (b < s) {
+                System.out.print(b + "  ");
+            } else {
+                System.out.print(b + " ");
+            }
+
+            for (int a = 0; a < s; a++) {
+                System.out.print(indicators[a][b-1] + " ");
+            }
+
+            System.out.println("");
+        }
+
+        System.out.println("");
+    }
+
+    public void setIndicator (int x, int y, String ind) {
+        indicators[x-1][y-1] = ind;
     }
 }
