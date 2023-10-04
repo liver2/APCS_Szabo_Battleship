@@ -14,7 +14,7 @@ public class Battleship {
         Ship p1l3a = new Ship();
         Ship p1l3b = new Ship();
         Ship p1l4 = new Ship();
-        Ship p1l5 = new Ship();
+        Ship p1l5 = new Ship(); // array
 
         Ship p2l2 = new Ship();
         Ship p2l3a = new Ship();
@@ -39,6 +39,10 @@ public class Battleship {
         promptShipPlacement(3, p2Board, p2l3b, "c");
         promptShipPlacement(4, p2Board, p2l4, "d");
         promptShipPlacement(5, p2Board, p2l5, "e");
+
+        System.out.println("Let's begin the guessing phase.");
+
+        // Find a way to track how many Ships on both sides have been sunk
     }
 
     public static void fastGame() {
@@ -124,7 +128,7 @@ public class Battleship {
             System.out.println("You missed.");
 
             board.setIndicator(x,y,"m");
-            board.printBoard();
+            board.printBoard(); // implement sinking
         }
     }
 
@@ -169,15 +173,15 @@ public class Battleship {
         do {
             System.out.println("So, tell me; what mode would you like to play today? Fast (input f, then enter) or Normal (input n, then enter)?");
             s1 = scanString.nextLine();
-            if (!(s1.equals("n") || s1.equals("f"))) {
+            if (!(s1.equals("n") || s1.equals("f"))) { // check that this works properly
                 System.out.println("Please input n or f.");
             }
         } while (!s1.equals("n") && !s1.equals("f"));
 
         if (s1.equals("n")) {
-            /* Implementation not done yet: normal game */
+            normalGame();
         } else if (s1.equals("f")) {
-            /* Implementation not done yet: fast game */
+            fastGame();
         }
     }
 }
