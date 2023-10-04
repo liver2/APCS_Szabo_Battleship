@@ -1,5 +1,9 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner scanString = new Scanner(System.in);
+
         Battleship game = new Battleship();
         String s1;
 

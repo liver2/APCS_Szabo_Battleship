@@ -4,7 +4,7 @@ public class Battleship {
     private Scanner scanNum = new Scanner(System.in);
     private Scanner scanString = new Scanner(System.in); // reduce to 1 scanner?
 
-    public static void normalGame() {
+    public void normalGame() {
         Board p1Board = new Board(10);
         Board p1Guess = new Board(10);
         Board p2Board = new Board(10);
@@ -45,15 +45,17 @@ public class Battleship {
         // Find a way to track how many Ships on both sides have been sunk
     }
 
-    public static void fastGame() {
+    public void fastGame() {
         Board aiBoard = new Board(8);
         Board pGuess = new Board(8);
     }
 
-    public static void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
+    public void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
         int x; // for ship args
         int y; // for ship args
         String orientation; // to set the parameters of the ship, we should declare a local variable specific to the function
+
+        board.printBoard();
 
         do {
             System.out.println("Please specify an X coordinate for your ship with length " + len + ".");
@@ -84,7 +86,7 @@ public class Battleship {
         board.printBoard(); // shows the board
     }
 
-    public static boolean shipPlacementCheck(int x, int y, int len, String orientation, Board board) {
+    public boolean shipPlacementCheck(int x, int y, int len, String orientation, Board board) {
         int[][] pos = new int[len][3]; // local variable/array "pos" used to "preview" the ship's x and y coordinates
         pos[0][0] = x;
         pos[0][1] = y;
@@ -112,7 +114,7 @@ public class Battleship {
         return true;
     }
     
-    public static void shotCheck(int x, int y, Board conjBoard, Board board, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // has to be a better way
+    public void shotCheck(int x, int y, Board conjBoard, Board board, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // has to be a better way
         if (conjBoard.getIndicator(x,y).equals("a") || conjBoard.getIndicator(x,y).equals("b") 
          || conjBoard.getIndicator(x,y).equals("c") || conjBoard.getIndicator(x,y).equals("d") || conjBoard.getIndicator(x,y).equals("e")) {
             s1.shot(x,y);
@@ -132,7 +134,7 @@ public class Battleship {
         }
     }
 
-    public static void /* void for now */ guess(Board board, Board conjBoard, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // board (p1Guess, p2Guess) is the Board of the one guessing. 
+    public void /* void for now */ guess(Board board, Board conjBoard, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // board (p1Guess, p2Guess) is the Board of the one guessing. 
         // conjBoard (p2Board, p1Board) is the board of the one receiving the hit.
         int x;
         int y;
