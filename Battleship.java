@@ -71,7 +71,7 @@ public class Battleship {
             orientation = strScan.nextLine();
         } while (!(orientation.equals("n") || orientation.equals("s") || orientation.equals("e") || orientation.equals("w"))
                  || // ln. 40: if orientation satisfies the specified directions, move to the next check.
-                 !(shipPlacementCheck(x, y, len, orientation) == true)); // checks if ship goes off the board
+                 !(shipPlacementCheck(x, y, len, orientation, board) == true)); // checks if ship goes off the board or overlaps
 
         System.out.println("Let's see your ship on the board...\n");
 
@@ -84,7 +84,7 @@ public class Battleship {
         board.printBoard(); // shows the board
     }
 
-    public static boolean shipPlacementCheck(int x, int y, int len, String orientation) {
+    public static boolean shipPlacementCheck(int x, int y, int len, String orientation, Board board) {
         int[][] pos = new int[len][3]; // local variable/array "pos" used to "preview" the ship's x and y coordinates
         pos[0][0] = x;
         pos[0][1] = y;
@@ -96,6 +96,14 @@ public class Battleship {
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < 2; j++) {
                 if (pos[i][j] > 10 || pos[i][j] < 1) {
+                    return false;
+                }
+            }
+        }
+
+        for (int i = 0; i < board.getSideLength(); i++) {
+            for (int j = 0; j < board.getSideLength(); j++) {
+                if (board.getIndicator(i,j) != ".") {
                     return false;
                 }
             }
@@ -114,7 +122,14 @@ public class Battleship {
             s5.shot(x,y); // EFFICIENCY
         }
     }
-    
+
+    public static void /* void for now */ guess(Board board) {
+        System.out.println("Here is your board:");
+        
+        // Prompt player for an x and a y
+
+        // 
+    }
     public static void main(String[] args) {
         String s1;
 
@@ -124,7 +139,7 @@ public class Battleship {
         System.out.println("Let me explain the rules.\n"); // Places new line
         System.out.println("In Regular mode, you and a friend will each place 5 ships on a 10x10 board.");
         System.out.println("The ships will be lengths 2, 3, 3, 4, and 5.");
-        System.out.println("Ships cannot be placed diagonally; only horizontally and vertically. They cannot extend off the board.");
+        System.out.println("Ships cannot be placed diagonally; only horizontally and vertically. They cannot extend off the board, and they cannot overlap.");
         System.out.println("Then, you and your friend will take turns guessing the positions of each others' ships.");
         System.out.println("You will know when you hit a ship, and you will know when a complete ship has been sunk.");
         System.out.println("If you can sink your friend's 5 ships, you win! Vice versa; whoever gets all five ships sunk first loses.\n");
@@ -148,3 +163,5 @@ public class Battleship {
         }
     }
 }
+
+/* To Do: Placing ship on top of another ship shouldn't be possible */ 
