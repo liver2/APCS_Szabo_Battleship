@@ -9,6 +9,34 @@ public class Battleship {
         Board p1Guess = new Board(10);
         Board p2Board = new Board(10);
         Board p2Guess = new Board(10);
+
+        Ship p1l2 = new Ship();
+        Ship p1l3a = new Ship();
+        Ship p1l3b = new Ship();
+        Ship p1l4 = new Ship();
+        Ship p1l5 = new Ship();
+
+        Ship p2l2 = new Ship();
+        Ship p2l3a = new Ship();
+        Ship p2l3b = new Ship();
+        Ship p2l4 = new Ship();
+        Ship p2l5 = new Ship();
+
+        System.out.println("Let's begin with Player 1. Player 2, please step away.\n");
+
+        promptShipPlacement(2, p1Board, p1l2, "a");
+        promptShipPlacement(3, p1Board, p1l3a, "b");
+        promptShipPlacement(3, p1Board, p1l3b, "c");
+        promptShipPlacement(4, p1Board, p1l4, "d");
+        promptShipPlacement(5, p1Board, p1l5, "e");
+
+        System.out.println("Now let's continue with Player 2. Player 1, please step away.\n");
+
+        promptShipPlacement(2, p2Board, p2l2, "a");
+        promptShipPlacement(3, p2Board, p2l3a, "b");
+        promptShipPlacement(3, p2Board, p2l3b, "c");
+        promptShipPlacement(4, p2Board, p2l4, "d");
+        promptShipPlacement(5, p2Board, p2l5, "e");
     }
 
     public static void fastGame() {
