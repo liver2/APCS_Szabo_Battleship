@@ -39,8 +39,6 @@ public class Battleship {
         promptShipPlacement(3, p2Board, p2l3b, "c");
         promptShipPlacement(4, p2Board, p2l4, "d");
         promptShipPlacement(5, p2Board, p2l5, "e");
-
-        // Guessing phase
     }
 
     public static void fastGame() {
@@ -49,26 +47,24 @@ public class Battleship {
     }
 
     public static void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
-        Scanner scan = new Scanner(System.in); // scanner for numbers
-        Scanner strScan = new Scanner(System.in); // scanner for strings (one scanner didn't work properly)
         int x; // for ship args
         int y; // for ship args
         String orientation; // to set the parameters of the ship, we should declare a local variable specific to the function
 
         do {
             System.out.println("Please specify an X coordinate for your ship with length " + len + ".");
-            x = scan.nextInt();
+            x = scanNum.nextInt();
         } while (!(x >= 0 && x <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
         do {
             System.out.println("Please specify a Y coordinate for your ship with length " + len + ".");
-            y = scan.nextInt();
+            y = scanNum.nextInt();
         } while (!(y >= 0 && y <= 10));
 
         do {
             System.out.println("Please specify an orientation for your ship with length " + len + ".");
             System.out.println("Specify north with n, south with s, east with e, and west with w."); // hopefully this is clear enough..
-            orientation = strScan.nextLine();
+            orientation = scanString.nextLine();
         } while (!(orientation.equals("n") || orientation.equals("s") || orientation.equals("e") || orientation.equals("w"))
                  || // ln. 40: if orientation satisfies the specified directions, move to the next check.
                  !(shipPlacementCheck(x, y, len, orientation, board) == true)); // checks if ship goes off the board or overlaps
@@ -112,23 +108,45 @@ public class Battleship {
         return true;
     }
     
-    public static void shotCheck(int x, int y, Board board, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) {
-        if (board.getIndicator(x,y).equals("a") || board.getIndicator(x,y).equals("b") 
-         || board.getIndicator(x,y).equals("c") || board.getIndicator(x,y).equals("d") || board.getIndicator(x,y).equals("e")) {
+    public static void shotCheck(int x, int y, Board conjBoard, Board board, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // has to be a better way
+        if (conjBoard.getIndicator(x,y).equals("a") || conjBoard.getIndicator(x,y).equals("b") 
+         || conjBoard.getIndicator(x,y).equals("c") || conjBoard.getIndicator(x,y).equals("d") || conjBoard.getIndicator(x,y).equals("e")) {
             s1.shot(x,y);
             s2.shot(x,y);
             s3.shot(x,y);
             s4.shot(x,y);
             s5.shot(x,y); // EFFICIENCY
+
+            System.out.println("You've hit something!");
+            board.setIndicator(x,y,"X");
+            board.printBoard();
+        } else {
+            System.out.println("You missed.");
+
+            board.setIndicator(x,y,"m");
+            board.printBoard();
         }
     }
 
-    public static void /* void for now */ guess(Board board) {
-        System.out.println("Here is your board:");
-        
-        // Prompt player for an x and a y
+    public static void /* void for now */ guess(Board board, Board conjBoard, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // board (p1Guess, p2Guess) is the Board of the one guessing. 
+        // conjBoard (p2Board, p1Board) is the board of the one receiving the hit.
+        int x;
+        int y;
 
-        // 
+        System.out.println("Here is your board:");
+        board.printBoard();
+
+        do {
+            System.out.println("What is the x-coordinate of the square you wish to fire a missle at?");
+            x = scanNum.nextInt();
+        } while (!(x >= 0 && x <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
+
+        do {
+            System.out.println("What is the y-coordinate of the square you wish to fire a missle at?");
+            y = scanNum.nextInt();
+        } while (!(y >= 0 && y <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
+
+        shotCheck(x, y, board, conjBoard, s1, s2, s3, s4, s5);
     }
     public static void main(String[] args) {
         String s1;
@@ -164,4 +182,4 @@ public class Battleship {
     }
 }
 
-/* To Do: Placing ship on top of another ship shouldn't be possible */ 
+/* To Do: Debug placing ship on top of each other */ 
