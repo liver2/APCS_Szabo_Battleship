@@ -22,6 +22,8 @@ public class Battleship {
         Ship p2l4 = new Ship();
         Ship p2l5 = new Ship();
 
+        // Ship placement phase
+
         System.out.println("Let's begin with Player 1. Player 2, please step away.\n");
 
         promptShipPlacement(2, p1Board, p1l2, "a");
@@ -37,6 +39,8 @@ public class Battleship {
         promptShipPlacement(3, p2Board, p2l3b, "c");
         promptShipPlacement(4, p2Board, p2l4, "d");
         promptShipPlacement(5, p2Board, p2l5, "e");
+
+        // Guessing phase
     }
 
     public static void fastGame() {
@@ -98,6 +102,17 @@ public class Battleship {
         }
 
         return true;
+    }
+    
+    public static void shotCheck(int x, int y, Board board, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) {
+        if (board.getIndicator(x,y).equals("a") || board.getIndicator(x,y).equals("b") 
+         || board.getIndicator(x,y).equals("c") || board.getIndicator(x,y).equals("d") || board.getIndicator(x,y).equals("e")) {
+            s1.shot(x,y);
+            s2.shot(x,y);
+            s3.shot(x,y);
+            s4.shot(x,y);
+            s5.shot(x,y); // EFFICIENCY
+        }
     }
     
     public static void main(String[] args) {

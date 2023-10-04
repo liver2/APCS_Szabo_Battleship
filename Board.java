@@ -37,4 +37,8 @@ public class Board {
     public void setIndicator (int x, int y, String ind) {
         indicators[x-1][y-1] = ind;
     }
+
+    public String getIndicator (int x, int y) {
+        return indicators[x-1][y-1];
+    }
 }
