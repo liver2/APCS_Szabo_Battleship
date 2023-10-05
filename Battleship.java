@@ -1,73 +1,79 @@
 import java.util.Scanner;
 
 public class Battleship {
-    static Scanner scanNum = new Scanner(System.in);
-    static Scanner scanString = new Scanner(System.in);
+    private Scanner scanNum = new Scanner(System.in);
+    private Scanner scanString = new Scanner(System.in); // reduce to 1 scanner?
 
-    public static void normalGame() {
+    public void normalGame() {
         Board p1Board = new Board(10);
         Board p1Guess = new Board(10);
         Board p2Board = new Board(10);
         Board p2Guess = new Board(10);
 
-        Ship s1p2 = new Ship(); // Initializing ships. Start with player 1 ships. s1p2 := "ship first player with length 2"
-        Ship s1p3a = new Ship();
-        Ship s1p3b = new Ship();
-        Ship s1p4 = new Ship();
-        Ship s1p5 = new Ship();
+        Ship p1l2 = new Ship();
+        Ship p1l3a = new Ship();
+        Ship p1l3b = new Ship();
+        Ship p1l4 = new Ship();
+        Ship p1l5 = new Ship(); // array
 
-        Ship s2p2 = new Ship(); 
-        Ship s2p3a = new Ship();
-        Ship s2p3b = new Ship();
-        Ship s2p4 = new Ship();
-        Ship s2p5 = new Ship();
+        Ship p2l2 = new Ship();
+        Ship p2l3a = new Ship();
+        Ship p2l3b = new Ship();
+        Ship p2l4 = new Ship();
+        Ship p2l5 = new Ship();
 
-        System.out.println("Player 1, let's begin placing your ships.");
+        // Ship placement phase
 
-        promptShipPlacement(2, p1Board, s1p2, "a");
-        promptShipPlacement(3, p1Board, s1p3a, "b");
-        promptShipPlacement(3, p1Board, s1p3b, "c");
-        promptShipPlacement(4, p1Board, s1p4, "d");
-        promptShipPlacement(5, p1Board, s1p5, "e");
+        System.out.println("Let's begin with Player 1. Player 2, please step away.\n");
 
-        System.out.println("Player 2, let's begin placing your ships.");
+        promptShipPlacement(2, p1Board, p1l2, "a");
+        promptShipPlacement(3, p1Board, p1l3a, "b");
+        promptShipPlacement(3, p1Board, p1l3b, "c");
+        promptShipPlacement(4, p1Board, p1l4, "d");
+        promptShipPlacement(5, p1Board, p1l5, "e");
 
-        promptShipPlacement(2, p2Board, s2p2, "a");
-        promptShipPlacement(3, p2Board, s2p3a, "b");
-        promptShipPlacement(3, p2Board, s2p3b, "c");
-        promptShipPlacement(4, p2Board, s2p4, "d");
-        promptShipPlacement(5, p2Board, s2p5, "e");
+        System.out.println("Now let's continue with Player 2. Player 1, please step away.\n");
+
+        promptShipPlacement(2, p2Board, p2l2, "a");
+        promptShipPlacement(3, p2Board, p2l3a, "b");
+        promptShipPlacement(3, p2Board, p2l3b, "c");
+        promptShipPlacement(4, p2Board, p2l4, "d");
+        promptShipPlacement(5, p2Board, p2l5, "e");
+
+        System.out.println("Let's begin the guessing phase.");
+
+        // Find a way to track how many Ships on both sides have been sunk
     }
 
-    public static void fastGame() {
+    public void fastGame() {
         Board aiBoard = new Board(8);
         Board pGuess = new Board(8);
     }
 
-    public static void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
-        Scanner scan = new Scanner(System.in); // scanner for numbers
-        Scanner strScan = new Scanner(System.in); // scanner for strings (one scanner didn't work properly)
+    public void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
         int x; // for ship args
         int y; // for ship args
         String orientation; // to set the parameters of the ship, we should declare a local variable specific to the function
 
+        board.printBoard();
+
         do {
             System.out.println("Please specify an X coordinate for your ship with length " + len + ".");
-            x = scan.nextInt();
+            x = scanNum.nextInt();
         } while (!(x >= 0 && x <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
         do {
             System.out.println("Please specify a Y coordinate for your ship with length " + len + ".");
-            y = scan.nextInt();
+            y = scanNum.nextInt();
         } while (!(y >= 0 && y <= 10));
 
         do {
             System.out.println("Please specify an orientation for your ship with length " + len + ".");
             System.out.println("Specify north with n, south with s, east with e, and west with w."); // hopefully this is clear enough..
-            orientation = strScan.nextLine();
+            orientation = scanString.nextLine();
         } while (!(orientation.equals("n") || orientation.equals("s") || orientation.equals("e") || orientation.equals("w"))
                  || // ln. 40: if orientation satisfies the specified directions, move to the next check.
-                 !(shipPlacementCheck(x, y, len, orientation) == true)); // checks if ship goes off the board
+                 !(shipPlacementCheck(x, y, len, orientation, board) == true)); // checks if ship goes off the board or overlaps
 
         System.out.println("Let's see your ship on the board...\n");
 
@@ -80,7 +86,7 @@ public class Battleship {
         board.printBoard(); // shows the board
     }
 
-    public static boolean shipPlacementCheck(int x, int y, int len, String orientation) {
+    public boolean shipPlacementCheck(int x, int y, int len, String orientation, Board board) {
         int[][] pos = new int[len][3]; // local variable/array "pos" used to "preview" the ship's x and y coordinates
         pos[0][0] = x;
         pos[0][1] = y;
@@ -97,39 +103,57 @@ public class Battleship {
             }
         }
 
+        for (int i = 0; i < board.getSideLength(); i++) {
+            for (int j = 0; j < board.getSideLength(); j++) {
+                if (board.getIndicator(i,j) != ".") {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
+    
+    public void shotCheck(int x, int y, Board conjBoard, Board board, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // has to be a better way
+        if (conjBoard.getIndicator(x,y).equals("a") || conjBoard.getIndicator(x,y).equals("b") 
+         || conjBoard.getIndicator(x,y).equals("c") || conjBoard.getIndicator(x,y).equals("d") || conjBoard.getIndicator(x,y).equals("e")) {
+            s1.shot(x,y);
+            s2.shot(x,y);
+            s3.shot(x,y);
+            s4.shot(x,y);
+            s5.shot(x,y); // EFFICIENCY
 
-    public static void main(String[] args) {
-        String s1;
+            System.out.println("You've hit something!");
+            board.setIndicator(x,y,"X");
+            board.printBoard();
+        } else {
+            System.out.println("You missed.");
 
-        System.out.println("--- Battleship ---");
-        System.out.println("Welcome to Battleship!");
-        System.out.println("For this version of Battleship, you can choose 2 modes: Fast and Regular.");
-        System.out.println("Let me explain the rules.\n"); // Places new line
-        System.out.println("In Regular mode, you and a friend will each place 5 ships on a 10x10 board.");
-        System.out.println("The ships will be lengths 2, 3, 3, 4, and 5.");
-        System.out.println("Ships cannot be placed diagonally; only horizontally and vertically. They cannot extend off the board.");
-        System.out.println("Then, you and your friend will take turns guessing the positions of each others' ships.");
-        System.out.println("You will know when you hit a ship, and you will know when a complete ship has been sunk.");
-        System.out.println("If you can sink your friend's 5 ships, you win! Vice versa; whoever gets all five ships sunk first loses.\n");
-        System.out.println("In Fast mode, a computer will randomize the placement of 3 ships on an 8x8 board.");
-        System.out.println("The ships will be lengths 2, 3, and 4.");
-        System.out.println("You will guess where the computer's ships are."); 
-        System.out.println("You will know when you hit a ship, and you will know when a complete ship has been sunk.");
-        System.out.println("When you sink all the ships, you will learn how many turns it took you; lower is better.\n");
-        do {
-            System.out.println("So, tell me; what mode would you like to play today? Fast (input f, then enter) or Normal (input n, then enter)?");
-            s1 = scanString.nextLine();
-            if (!(s1.equals("n") || s1.equals("f"))) {
-                System.out.println("Please input n or f.");
-            }
-        } while (!s1.equals("n") && !s1.equals("f"));
-
-        if (s1.equals("n")) {
-            /* Implementation not done yet: normal game */
-        } else if (s1.equals("f")) {
-            /* Implementation not done yet: fast game */
+            board.setIndicator(x,y,"m");
+            board.printBoard(); // implement sinking
         }
     }
+
+    public void /* void for now */ guess(Board board, Board conjBoard, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // board (p1Guess, p2Guess) is the Board of the one guessing. 
+        // conjBoard (p2Board, p1Board) is the board of the one receiving the hit.
+        int x;
+        int y;
+
+        System.out.println("Here is your board:");
+        board.printBoard();
+
+        do {
+            System.out.println("What is the x-coordinate of the square you wish to fire a missle at?");
+            x = scanNum.nextInt();
+        } while (!(x >= 0 && x <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
+
+        do {
+            System.out.println("What is the y-coordinate of the square you wish to fire a missle at?");
+            y = scanNum.nextInt();
+        } while (!(y >= 0 && y <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
+
+        shotCheck(x, y, board, conjBoard, s1, s2, s3, s4, s5);
+    }
 }
+
+/* To Do: Debug placing ship on top of each other */ 

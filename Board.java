@@ -5,13 +5,17 @@ public class Board {
     public Board(int side) {
         s = side;
 
+        String[][] indicators = new String[s][s];
+
         for (int c = 0; c < s; c++) {
             for (int d = 0; d < s; d++) {
                 indicators[c][d] = ".";
             }
         }
+    }
 
-        String[][] indicators = new String[s][s];
+    public int getSideLength() {
+        return s;
     }
 
     public void printBoard () {
@@ -36,5 +40,9 @@ public class Board {
 
     public void setIndicator (int x, int y, String ind) {
         indicators[x-1][y-1] = ind;
+    }
+
+    public String getIndicator (int x, int y) {
+        return indicators[x-1][y-1];
     }
 }
