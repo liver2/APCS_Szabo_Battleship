@@ -5,7 +5,7 @@ public class Board {
     public Board(int side) {
         s = side;
 
-        String[][] indicators = new String[s][s];
+        indicators = new String[s][s];
 
         for (int c = 0; c < s; c++) {
             for (int d = 0; d < s; d++) {
