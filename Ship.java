@@ -30,7 +30,7 @@ public class Ship {
             counter += position[l][2];
         }
 
-        if (counter == length) {
+        if (counter == 0) {
             sunk = true;
         }
     }
