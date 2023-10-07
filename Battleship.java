@@ -152,7 +152,7 @@ public class Battleship {
             s4.shot(x,y);
             s5.shot(x,y); // EFFICIENCY
 
-            System.out.println("Player " + p + ", You've hit something!");
+            System.out.println("\nPlayer " + p + ", You've hit something!");
             board.setIndicator(x,y,"X");
 
             if (s1.getSunk() == true) {
