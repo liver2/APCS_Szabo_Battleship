@@ -4,6 +4,13 @@ public class Battleship {
     private Scanner scanNum = new Scanner(System.in);
     private Scanner scanString = new Scanner(System.in); // reduce to 1 scanner?
 
+    public boolean winCheck(Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) {
+        if (s1.getSunk() == true && s2.getSunk() == true && s3.getSunk() == true && s4.getSunk() == true && s5.getSunk() == true) {
+            return true;
+        }
+        return false;
+    }
+
     public void normalGame() {
         Board p1Board = new Board(10);
         Board p1Guess = new Board(10);
@@ -42,10 +49,23 @@ public class Battleship {
 
         System.out.println("Let's begin the guessing phase.");
 
-        do {
+        while (true) {
             guess(p1Guess, p2Board, p2l2, p2l3a, p2l3b, p2l4, p2l5, "1");
+
+            if (winCheck(p2l2, p2l3a, p2l3b, p2l4, p2l5) == true) {
+                System.out.println("All of Player 2's ships have been sunk; Player 1 has won!");
+                System.out.println("Thank you for playing!");
+                break;
+            }
+
             guess(p2Guess, p1Board, p1l2, p1l3a, p1l3b, p1l4, p1l5, "2");
-        } while (/* solve for implementation */ true);
+
+            if (winCheck(p1l2, p1l3a, p1l3b, p1l4, p1l5) == true) {
+                System.out.println("All of Player 1's ships have been sunk; Player 2 has won!");
+                System.out.println("Thank you for playing!");
+                break;
+            }
+        }
     }
 
     public void fastGame() {
@@ -134,6 +154,37 @@ public class Battleship {
 
             System.out.println("Player " + p + ", You've hit something!");
             board.setIndicator(x,y,"X");
+
+            if (s1.getSunk() == true) {
+                for (int i = 0; i < s1.getLength(); i++) {
+                    board.setIndicator(s1.getPosition(i,0),s1.getPosition(i, 1),"S");
+                }
+            }
+
+            if (s2.getSunk() == true) {
+                for (int i = 0; i < s2.getLength(); i++) {
+                    board.setIndicator(s2.getPosition(i,0),s2.getPosition(i, 1),"S");
+                }
+            }
+
+            if (s3.getSunk() == true) {
+                for (int i = 0; i < s3.getLength(); i++) {
+                    board.setIndicator(s3.getPosition(i,0),s3.getPosition(i, 1),"S");
+                }
+            }
+
+            if (s4.getSunk() == true) {
+                for (int i = 0; i < s4.getLength(); i++) {
+                    board.setIndicator(s4.getPosition(i,0),s4.getPosition(i, 1),"S");
+                }
+            }
+
+            if (s5.getSunk() == true) {
+                for (int i = 0; i < s5.getLength(); i++) {
+                    board.setIndicator(s5.getPosition(i,0),s5.getPosition(i, 1),"S");
+                }
+            }
+
             board.printBoard();
         } else {
             System.out.println("Player " + p + ", You missed.");
@@ -164,5 +215,3 @@ public class Battleship {
         shotCheck(x, y, board, conjBoard, s1, s2, s3, s4, s5, p);
     }
 }
-
-/* To Do: Debug placing ship on top of each other */ 
