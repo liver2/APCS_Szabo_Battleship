@@ -74,11 +74,16 @@ public class Battleship {
         Board aiBoard = new Board(8);
         Board pGuess = new Board(8);
 
-        Ship aiShip[] = new Ship[3];
+        Ship aiShip1 = new Ship();
+        Ship aiShip2 = new Ship();
+        Ship aiShip3 = new Ship();
 
         System.out.println("Please wait while the computer generates ships...");
 
-        randomPlace(aiShip, aiBoard);
+        randomPlace(aiShip1, aiBoard, 2);
+        randomPlace(aiShip2, aiBoard, 3);
+        randomPlace(aiShip3, aiBoard, 4);
+        
         aiBoard.printBoard();
     }
 
@@ -224,27 +229,24 @@ public class Battleship {
         shotCheck(x, y, board, conjBoard, s1, s2, s3, s4, s5, p);
     }
 
-    public void randomPlace(Ship ships[], Board board) {
-        int x[] = new int[3];
-        int y[] = new int[3];
-        int o[] = new int[3];
-        String orientation[] = new String[3];
-
-        for (int i = 0; i < 3; i++) {
+    public void randomPlace(Ship argShip, Board board, int len) {
+        int x;
+        int y;
+        int o;
+        String orientation = "init";
             
-            do {
-                x[i] = (int) ((Math.random()*board.getSideLength()) + 1); y[i] = (int) ((Math.random()*board.getSideLength()) + 1); o[i] = (int) ((Math.random()*4) + 1);
-                if (o[i] == 1) orientation[i] = "n";
-                if (o[i] == 2) orientation[i] = "e";
-                if (o[i] == 3) orientation[i] = "s";
-                if (o[i] == 4) orientation[i] = "w";
-            } while (!(shipPlacementCheck(x[i], y[i], i+2, orientation[i], board) == true));
+        do {
+            x = (int) ((Math.random()*board.getSideLength()) + 1); y = (int) ((Math.random()*board.getSideLength()) + 1); o = (int) ((Math.random()*4) + 1);
+            if (o == 1) orientation = "n";
+            if (o == 2) orientation = "e";
+            if (o == 3) orientation = "s";
+            if (o == 4) orientation = "w";
+        } while (!(shipPlacementCheck(x, y, len, orientation, board)));
 
-            ships[i].setShipParams(i+2, x[i], y[i], orientation[i]);
+        argShip.setShipParams(len, x, y, orientation);
 
-            for (int j = 0; j < i+2; i++) {
-                board.setIndicator(ships[i].getPosition(j,0), ships[i].getPosition(j,1), "~"); // setting each indicator on the board
-            } 
-        }
+        for (int j = 0; j < len; j++) {
+            board.setIndicator(argShip.getPosition(j,0), argShip.getPosition(j,1), "~"); // setting each indicator on the board
+        } 
     }
 }

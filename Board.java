@@ -19,10 +19,16 @@ public class Board {
     }
 
     public void printBoard () {
-        System.out.println("   1 2 3 4 5 6 7 8 9 10");
+        System.out.print("   ");
+
+        for (int i = 1; i <= s; i++) {
+            System.out.print(i + " ");
+        }
+
+        System.out.println("");
         
         for (int b = 1; b <= s; b++) {
-            if (b < s) {
+            if (b < 10) {
                 System.out.print(b + "  ");
             } else {
                 System.out.print(b + " ");
