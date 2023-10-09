@@ -78,13 +78,8 @@ public class Battleship {
 
         System.out.println("Please wait while the computer generates ships...");
 
-        for (int i = 0; i < 3; i++) {
-            if {
-
-            }
-
-            aiShip[i].setShipParams()
-        }
+        randomPlace(aiShip, aiBoard);
+        aiBoard.printBoard();
     }
 
     public void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
@@ -232,18 +227,24 @@ public class Battleship {
     public void randomPlace(Ship ships[], Board board) {
         int x[] = new int[3];
         int y[] = new int[3];
+        int o[] = new int[3];
         String orientation[] = new String[3];
 
         for (int i = 0; i < 3; i++) {
-            x[i] = (int) ((Math.random()*board.getSideLength()) + 1); y[i] = (int) ((Math.random()*board.getSideLength()) + 1);
-
             
-
-            if {
-
-            }
+            do {
+                x[i] = (int) ((Math.random()*board.getSideLength()) + 1); y[i] = (int) ((Math.random()*board.getSideLength()) + 1); o[i] = (int) ((Math.random()*4) + 1);
+                if (o[i] == 1) orientation[i] = "n";
+                if (o[i] == 2) orientation[i] = "e";
+                if (o[i] == 3) orientation[i] = "s";
+                if (o[i] == 4) orientation[i] = "w";
+            } while (!(shipPlacementCheck(x[i], y[i], i+2, orientation[i], board) == true));
 
             ships[i].setShipParams(i+2, x[i], y[i], orientation[i]);
+
+            for (int j = 0; j < i+2; i++) {
+                board.setIndicator(ships[i].getPosition(j,0), ships[i].getPosition(j,1), "~"); // setting each indicator on the board
+            } 
         }
     }
 }
