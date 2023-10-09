@@ -69,8 +69,22 @@ public class Battleship {
     }
 
     public void fastGame() {
+        int counter = 0;
+
         Board aiBoard = new Board(8);
         Board pGuess = new Board(8);
+
+        Ship aiShip[] = new Ship[3];
+
+        System.out.println("Please wait while the computer generates ships...");
+
+        for (int i = 0; i < 3; i++) {
+            if {
+
+            }
+
+            aiShip[i].setShipParams()
+        }
     }
 
     public void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
@@ -82,12 +96,12 @@ public class Battleship {
             do {
                 System.out.println("Please specify an X coordinate for your ship with length " + len + ".");
                 x = scanNum.nextInt();
-            } while (!(x >= 0 && x <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
+            } while (!(x >= 0 && x <= board.getSideLength())); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
             do {
                 System.out.println("Please specify a Y coordinate for your ship with length " + len + ".");
                 y = scanNum.nextInt();
-            } while (!(y >= 0 && y <= 10));
+            } while (!(y >= 0 && y <= board.getSideLength()));
 
             System.out.println("Please specify an orientation for your ship with length " + len + ".");
             System.out.println("Specify north with n, south with s, east with e, and west with w."); // hopefully this is clear enough..
@@ -126,7 +140,7 @@ public class Battleship {
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < 2; j++) {
-                if (pos[i][j] > 10 || pos[i][j] < 1) {
+                if (pos[i][j] > board.getSideLength() || pos[i][j] < 1) {
                     return false;
                 }
             }
@@ -213,5 +227,23 @@ public class Battleship {
         } while (!(y >= 0 && y <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
         shotCheck(x, y, board, conjBoard, s1, s2, s3, s4, s5, p);
+    }
+
+    public void randomPlace(Ship ships[], Board board) {
+        int x[] = new int[3];
+        int y[] = new int[3];
+        String orientation[] = new String[3];
+
+        for (int i = 0; i < 3; i++) {
+            x[i] = (int) ((Math.random()*board.getSideLength()) + 1); y[i] = (int) ((Math.random()*board.getSideLength()) + 1);
+
+            
+
+            if {
+
+            }
+
+            ships[i].setShipParams(i+2, x[i], y[i], orientation[i]);
+        }
     }
 }
