@@ -11,6 +11,13 @@ public class Battleship {
         return false; // == hasn't won yet
     }
 
+    public boolean winCheck(Ship s1, Ship s2, Ship s3) {
+        if (s1.getSunk() == true && s2.getSunk() == true && s3.getSunk() == true) { // checking from getters if all ships are sunk
+            return true; // == win!
+        }
+        return false; // == hasn't won yet
+    }
+
     public void normalGame() {
         Board p1Board = new Board(10); // just like the battleship game, there should be 4 boards; 2 for players checking where they want their ships to go
         Board p1Guess = new Board(10); // and 2 for checking & tracking guesses on the other board
@@ -87,6 +94,16 @@ public class Battleship {
         randomPlace(aiShip3, aiBoard, 4);
         
         // aiBoard.printBoard(); for debugging purposes.
+
+        while (true) {
+            guess(pGuess, aiBoard, aiShip1, aiShip1, aiShip2, aiShip2, aiShip3, "1");
+            counter++;
+
+            if (winCheck(aiShip1, aiShip2, aiShip3) == true) {
+                System.out.println("You've sunk all the ships! Your score is " + counter + ".");
+                break;
+            }
+        }
     }
 
     public void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
