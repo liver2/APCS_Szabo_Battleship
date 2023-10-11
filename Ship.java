@@ -11,7 +11,7 @@ public class Ship {
         position[0][0] = posStartX;
         position[0][1] = posStartY;
         for (int i = 0; i < length; i++) {
-            position[i][0] = posStartX - i*(Boolean.compare(orientation.equals("w"), true)) + i*(Boolean.compare(orientation.equals("e"), true)); // 
+            position[i][0] = posStartX - i*(Boolean.compare(orientation.equals("w"), true)) + i*(Boolean.compare(orientation.equals("e"), true));
             position[i][1] = posStartY + i*(Boolean.compare(orientation.equals("s"), true)) - i*(Boolean.compare(orientation.equals("n"), true));
             position[i][2] = 1; // 1 means not sunk. 0 means sunk.
         }
