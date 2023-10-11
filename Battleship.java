@@ -263,7 +263,7 @@ public class Battleship {
         argShip.setShipParams(len, x, y, orientation); // setting the parameters of the argued ship to those randomly generated that fit the criteria
 
         for (int j = 0; j < len; j++) {
-            board.setIndicator(argShip.getPosition(j,0), argShip.getPosition(j,1), "~"); // setting each indicator on the board
+            board.setIndicator(argShip.getPosition(j,0), argShip.getPosition(j,1), "a"); // setting each indicator on the board
         } 
     }
 }
