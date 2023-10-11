@@ -4,18 +4,14 @@ public class Battleship {
     private Scanner scanNum = new Scanner(System.in); // two scanners for different types
     private Scanner scanString = new Scanner(System.in); // reduce to 1 scanner?
 
-    public boolean winCheck(Ship s1, Ship s2, Ship s3, Ship s4, Ship s5) { // method to check for if someone wins
-        if (s1.getSunk() == true && s2.getSunk() == true && s3.getSunk() == true && s4.getSunk() == true && s5.getSunk() == true) { // checking from getters if all ships are sunk
-            return true; // == win!
+    public boolean winCheck(Ship[] s, int len) { // method to check for if someone wins
+        for (int i = 0; i < len; i++) {
+            if (s[i].getSunk() != true) {
+                return false;
+            }
         }
-        return false; // == hasn't won yet
-    }
 
-    public boolean winCheck(Ship s1, Ship s2, Ship s3) {
-        if (s1.getSunk() == true && s2.getSunk() == true && s3.getSunk() == true) { // checking from getters if all ships are sunk
-            return true; // == win!
-        }
-        return false; // == hasn't won yet
+        return true;
     }
 
     public void normalGame() {
@@ -24,52 +20,41 @@ public class Battleship {
         Board p2Board = new Board(10);
         Board p2Guess = new Board(10);
 
-        Ship p1l2 = new Ship(); // for player 1. creating new ships. no constructors yet, because the parameters of the ships are yet to be decided...
-        Ship p1l3a = new Ship();
-        Ship p1l3b = new Ship();
-        Ship p1l4 = new Ship();
-        Ship p1l5 = new Ship(); 
-
-        Ship p2l2 = new Ship(); // for player 2
-        Ship p2l3a = new Ship();
-        Ship p2l3b = new Ship();
-        Ship p2l4 = new Ship();
-        Ship p2l5 = new Ship();
-
-        // Ship placement phase
+        Ship[] p1 = new Ship[5]; // for player 1. creating new ships. no constructors yet, because the parameters of the ships are yet to be decided...
+        Ship[] p2 = new Ship[5]; // for player 2
 
         System.out.println("Let's begin with Player 1. Player 2, please step away.\n");
 
-        promptShipPlacement(2, p1Board, p1l2, "a"); // ship placement method
-        promptShipPlacement(3, p1Board, p1l3a, "b");
-        promptShipPlacement(3, p1Board, p1l3b, "c");
-        promptShipPlacement(4, p1Board, p1l4, "d");
-        promptShipPlacement(5, p1Board, p1l5, "e");
+        promptShipPlacement(2, p1Board, p1[0], "a"); // ship placement method
+        promptShipPlacement(3, p1Board, p1[1], "b");
+        promptShipPlacement(3, p1Board, p1[2], "c");
+        promptShipPlacement(4, p1Board, p1[3], "d");
+        promptShipPlacement(5, p1Board, p1[4], "e");
 
         System.out.println("Now let's continue with Player 2. Player 1, please step away.\n"); // transition to ship placcement, player 2
     
-        promptShipPlacement(2, p2Board, p2l2, "a");
-        promptShipPlacement(3, p2Board, p2l3a, "b");
-        promptShipPlacement(3, p2Board, p2l3b, "c");
-        promptShipPlacement(4, p2Board, p2l4, "d");
-        promptShipPlacement(5, p2Board, p2l5, "e");
+        promptShipPlacement(2, p2Board, p2[0], "a");
+        promptShipPlacement(3, p2Board, p2[1], "b");
+        promptShipPlacement(3, p2Board, p2[2], "c");
+        promptShipPlacement(4, p2Board, p2[3], "d");
+        promptShipPlacement(5, p2Board, p2[4], "e");
 
         System.out.println("Let's begin the guessing phase.");
 
         // Guessing phase
 
         while (true) { // don't worry, this won't infinitely loop!! using break when someone has won
-            guess(p1Guess, p2Board, p2l2, p2l3a, p2l3b, p2l4, p2l5, "1"); // guessing & checking if guess hits
+            guess(p1Guess, p2Board, p2, 5, "1"); // guessing & checking if guess hits
 
-            if (winCheck(p2l2, p2l3a, p2l3b, p2l4, p2l5) == true) {
+            if (winCheck(p2, 5) == true) {
                 System.out.println("All of Player 2's ships have been sunk; Player 1 has won!");
                 System.out.println("Thank you for playing!");
                 break; // breaks the loop and exits the program by doing so
             }
 
-            guess(p2Guess, p1Board, p1l2, p1l3a, p1l3b, p1l4, p1l5, "2");
+            guess(p2Guess, p1Board, p1, 5, "2");
 
-            if (winCheck(p1l2, p1l3a, p1l3b, p1l4, p1l5) == true) {
+            if (winCheck(p1, 5) == true) {
                 System.out.println("All of Player 1's ships have been sunk; Player 2 has won!");
                 System.out.println("Thank you for playing!");
                 break;
@@ -83,24 +68,22 @@ public class Battleship {
         Board aiBoard = new Board(8); // two boards: one for the ai to place...
         Board pGuess = new Board(8); // and one for the player to guess on
 
-        Ship aiShip1 = new Ship(); // similarly placing ships on the ai board
-        Ship aiShip2 = new Ship();
-        Ship aiShip3 = new Ship();
+        Ship[] aiShip = new Ship[3]; // similarly placing ships on the ai board
 
         System.out.println("Please wait while the computer generates ships...");
 
-        randomPlace(aiShip1, aiBoard, 2); // repeatedly generates random ship configurations until the system finds one that is valid.
-        randomPlace(aiShip2, aiBoard, 3);
-        randomPlace(aiShip3, aiBoard, 4);
+        randomPlace(aiShip[0], aiBoard, 2); // repeatedly generates random ship configurations until the system finds one that is valid.
+        randomPlace(aiShip[1], aiBoard, 3);
+        randomPlace(aiShip[2], aiBoard, 4);
         
         // aiBoard.printBoard(); for debugging purposes.
 
         while (true) {
-            guess(pGuess, aiBoard, aiShip1, aiShip1, aiShip2, aiShip2, aiShip3, "1");
+            guess(pGuess, aiBoard, aiShip, 3, "1");
             counter++;
 
-            if (winCheck(aiShip1, aiShip2, aiShip3) == true) {
-                System.out.println("You've sunk all the ships! Your score is " + counter + ".");
+            if (winCheck(aiShip, 3) == true) {
+                System.out.println("You've sunk all the ships! You took " + counter + " turns.");
                 break;
             }
         }
@@ -173,48 +156,24 @@ public class Battleship {
         return true;
     }
     
-    public void shotCheck(int x, int y, Board board, Board conjBoard, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5, String p) { // has to be a better way
+    public void shotCheck(int x, int y, Board board, Board conjBoard, Ship[] s, int len, String p) { // has to be a better way
         if (conjBoard.getIndicator(x,y).equals("a") || conjBoard.getIndicator(x,y).equals("b") 
          || conjBoard.getIndicator(x,y).equals("c") || conjBoard.getIndicator(x,y).equals("d") || conjBoard.getIndicator(x,y).equals("e")) { // for Board board...
             // ...checks if the board it is matched up with, conjBoard, has a ship at the position on which the gues was
-            s1.shot(x,y);
-            s2.shot(x,y);
-            s3.shot(x,y);
-            s4.shot(x,y);
-            s5.shot(x,y); // there has to be a better way to do this...
 
             System.out.println("\nPlayer " + p + ", You've hit something!");
             board.setIndicator(x,y,"X"); // X is the symbol for hit.
 
-            if (s1.getSunk() == true) {
-                for (int i = 0; i < s1.getLength(); i++) {
-                    board.setIndicator(s1.getPosition(i,0),s1.getPosition(i, 1),"S"); // set the ships' indicator to sunk on the guess map
+            for (int i = 0; i < len; i++) {
+                s[i].shot(x,y);
+                // checks whether ships are sunk
+
+                if (s[i].getSunk() == true) {
+                    for (int j = 0; j < s[i].getLength(); j++) {
+                        board.setIndicator(s[i].getPosition(j,0),s[i].getPosition(j,1),"S");
+                    }
                 }
             }
-
-            if (s2.getSunk() == true) {
-                for (int i = 0; i < s2.getLength(); i++) {
-                    board.setIndicator(s2.getPosition(i,0),s2.getPosition(i, 1),"S");
-                }
-            }
-
-            if (s3.getSunk() == true) {
-                for (int i = 0; i < s3.getLength(); i++) {
-                    board.setIndicator(s3.getPosition(i,0),s3.getPosition(i, 1),"S");
-                }
-            }
-
-            if (s4.getSunk() == true) {
-                for (int i = 0; i < s4.getLength(); i++) {
-                    board.setIndicator(s4.getPosition(i,0),s4.getPosition(i, 1),"S");
-                }
-            }
-
-            if (s5.getSunk() == true) {
-                for (int i = 0; i < s5.getLength(); i++) {
-                    board.setIndicator(s5.getPosition(i,0),s5.getPosition(i, 1),"S");
-                }
-            } // these five methods check whether all the ships are sunk.
 
             board.printBoard();
         } else {
@@ -225,7 +184,7 @@ public class Battleship {
         }
     }
 
-    public void /* void for now */ guess(Board board, Board conjBoard, Ship s1, Ship s2, Ship s3, Ship s4, Ship s5, String p) { // board (p1Guess, p2Guess) is the Board of the one guessing. 
+    public void /* void for now */ guess(Board board, Board conjBoard, Ship[] s, int len, String p) { // board (p1Guess, p2Guess) is the Board of the one guessing. 
         // conjBoard (p2Board, p1Board) is the board of the one receiving the hit. ships are enemy ships
         int x; // for inputs
         int y; // for inputs
@@ -243,7 +202,7 @@ public class Battleship {
             y = scanNum.nextInt();
         } while (!(y >= 0 && y <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
-        shotCheck(x, y, board, conjBoard, s1, s2, s3, s4, s5, p);
+        shotCheck(x, y, board, conjBoard, s, len, p);
     }
 
     public void randomPlace(Ship argShip, Board board, int len) {
