@@ -1,13 +1,13 @@
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
+public class Main { // Main class to run Battleship's methods (split up classes to make it more organized)
+    public static void main(String[] args) { // Main method, to run when Main is built and executed
         Scanner scanString = new Scanner(System.in); // create scanner to scan string;two scanners b/c it gets buggy with num and string used under one.
 
         Battleship game = new Battleship(); // create new battleship instance (battleship is where all the methods are stored, less cluttered)
         String s1; // for future player input
 
-        System.out.println("--- Battleship ---\n");
+        System.out.println("--- Battleship ---\n"); // Instructions
         System.out.println("Welcome to Battleship!");
         System.out.println("For this version of Battleship, you can choose 2 modes: Fast and Regular.");
         System.out.println("Let me explain the rules.\n"); // Places new line
