@@ -22,10 +22,11 @@ public class Main {
         System.out.println("The ships will be lengths 2, 3, and 4.");
         System.out.println("You will guess where the computer's ships are."); 
         System.out.println("You will know when you hit a ship, and you will know when a complete ship has been sunk.");
-        System.out.println("When you sink all the ships, you will learn how many turns it took you; lower is better.\n");
+        System.out.println("When you sink all the ships, you will learn how many turns it took you; lower is better!!!\n");
         do { // do-while to check for correct input
             System.out.println("So, tell me; what mode would you like to play today? Fast (input f, then enter) or Normal (input n, then enter)?");
             s1 = scanString.nextLine();
+
             if (!(s1.equals("n") || s1.equals("f"))) { // check that this works properly
                 System.out.println("Please input n or f.");
             }

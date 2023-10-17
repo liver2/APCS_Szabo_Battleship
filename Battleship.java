@@ -23,6 +23,11 @@ public class Battleship {
         Ship[] p1 = new Ship[5]; // for player 1. creating new ships. no constructors yet, because the parameters of the ships are yet to be decided...
         Ship[] p2 = new Ship[5]; // for player 2
 
+        for (int i = 0; i < 5; i++) {
+            p1[i] = new Ship();
+            p2[i] = new Ship();
+        }
+
         System.out.println("Let's begin with Player 1. Player 2, please step away.\n");
 
         promptShipPlacement(2, p1Board, p1[0], "a"); // ship placement method
@@ -72,6 +77,10 @@ public class Battleship {
 
         System.out.println("Please wait while the computer generates ships...");
 
+        for (int i = 0; i < 3; i++) {
+            aiShip[i] = new Ship();
+        }
+
         randomPlace(aiShip[0], aiBoard, 2); // repeatedly generates random ship configurations until the system finds one that is valid.
         randomPlace(aiShip[1], aiBoard, 3);
         randomPlace(aiShip[2], aiBoard, 4);
@@ -90,8 +99,7 @@ public class Battleship {
     }
 
     public void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
-        int x; // for ship args
-        int y; // for ship args
+        int x, y; // for ship args
         String orientation; // to set the parameters of the ship, we should declare a local variable specific to the function
 
         do {
@@ -186,8 +194,7 @@ public class Battleship {
 
     public void /* void for now */ guess(Board board, Board conjBoard, Ship[] s, int len, String p) { // board (p1Guess, p2Guess) is the Board of the one guessing. 
         // conjBoard (p2Board, p1Board) is the board of the one receiving the hit. ships are enemy ships
-        int x; // for inputs
-        int y; // for inputs
+        int x, y; // for input
 
         System.out.println("Here is your board, Player " + p + ":");
         board.printBoard();
@@ -206,9 +213,7 @@ public class Battleship {
     }
 
     public void randomPlace(Ship argShip, Board board, int len) {
-        int x;
-        int y;
-        int o;
+        int x, y, o; // for random-generated numbers
         String orientation = "init"; // because it said i needed to initialize the variable......
             
         do {
