@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Battleship { // The main "hub" where most methods that work with the Board and Ship classes reside and are called upon in the normalGame() and fastGame() methods
@@ -89,19 +90,27 @@ public class Battleship { // The main "hub" where most methods that work with th
     }
 
     public void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
-        int x; // for ship args
-        int y; // for ship args
+        int x = 0; // for ship args
+        int y = 0; // for ship args
         String orientation; // to set the parameters of the ship, we should declare a local variable specific to the function
 
         do {
             do {
-                System.out.println("Please specify an X coordinate for your ship with length " + len + ".");
-                x = scanNum.nextInt();
+                try {
+                    System.out.println("Please specify an X coordinate for your ship with length " + len + ".");
+                    x = scanNum.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Please input a number from 1 to 10.");
+                }
             } while (!(x >= 0 && x <= board.getSideLength())); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
             do {
-                System.out.println("Please specify a Y coordinate for your ship with length " + len + ".");
-                y = scanNum.nextInt();
+                try {
+                    System.out.println("Please specify a Y coordinate for your ship with length " + len + ".");
+                    y = scanNum.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Please input a number from 1 to 10.");
+                }
             } while (!(y >= 0 && y <= board.getSideLength()));
 
             System.out.println("Please specify an orientation for your ship with length " + len + ".");
@@ -193,13 +202,21 @@ public class Battleship { // The main "hub" where most methods that work with th
         board.printBoard();
 
         do {
-            System.out.println("What is the x-coordinate of the square you wish to fire a missle at?");
-            x = scanNum.nextInt();
+            try {
+                System.out.println("What is the x-coordinate of the square you wish to fire a missle at?");
+                x = scanNum.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please input a number from 1 to 10.");
+            }
         } while (!(x >= 0 && x <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
         do {
-            System.out.println("What is the y-coordinate of the square you wish to fire a missle at?");
-            y = scanNum.nextInt();
+            try {
+                System.out.println("What is the y-coordinate of the square you wish to fire a missle at?");
+                y = scanNum.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please input a number from 1 to 10.");
+            }
         } while (!(y >= 0 && y <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
         shotCheck(x, y, board, conjBoard, s, len, p);
