@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
-public class Ship {
+public class Ship { // Ship class emulates the physical "ships" that the player places on the Board
     int length; // ship length
     int[][] position; // x position, y position, status
     boolean sunk = false; // sunk status
 
-    public void setShipParams (int len, int posStartX, int posStartY, String orientation) {
+    public void setShipParams (int len, int posStartX, int posStartY, String orientation) { // Sets the ship parameters, because a constructor is a bit hard to work into a user input method
         length = len;
         position = new int[length][3];
         position[0][0] = posStartX;
@@ -17,9 +17,7 @@ public class Ship {
         }
     }
 
-    // checks where the shot hit
-
-    public void shot (int x, int y) {
+    public void shot (int x, int y) { // checks where the shot hit
         int counter = 0; // counter: if the ship is still alive the counter != 0 and thus, ship is still alive (true)
 
         for (int k = 0; k < length; k++) {
@@ -37,17 +35,15 @@ public class Ship {
         }
     }
 
-    // easy getters
-
-    public int getPosition(int x, int y) {
+    public int getPosition(int x, int y) { // gets position from 2d array acc. to arguments
         return position[x][y];
     }
 
-    public int getLength() {
+    public int getLength() { // returns length of the ship
         return length;
     }
 
-    public boolean getSunk() {
+    public boolean getSunk() { // returns status of the ship. if the ship is sunk "true" and if not "false"
         return sunk;
     }
 }

@@ -1,8 +1,8 @@
-public class Board {
+public class Board { // the Board class is a computer representation of a board upon which ships are placed.
     String[][] indicators;
     int s;
     
-    public Board(int side) {
+    public Board(int side) { // constructs the board and specifies the side length
         s = side; // sets s variable to the side
 
         indicators = new String[s][s]; // creates indicators' size
@@ -14,11 +14,11 @@ public class Board {
         }
     }
 
-    public int getSideLength() {
+    public int getSideLength() { // easy getter that returns side length
         return s;
     }
 
-    public void printBoard () {
+    public void printBoard () { // prints the board out--this one is used a lot!
         System.out.print("   "); // space in front to line everything up
 
         for (int i = 1; i <= s; i++) {
@@ -44,13 +44,11 @@ public class Board {
         System.out.println("");
     }
 
-    // easy getters and setters
-
-    public void setIndicator (int x, int y, String ind) {
+    public void setIndicator (int x, int y, String ind) { // sets indicator according to arguments
         indicators[x-1][y-1] = ind;
     }
 
-    public String getIndicator (int x, int y) {
+    public String getIndicator (int x, int y) { // returns indicator according to arguments
         return indicators[x-1][y-1];
     }
 }
