@@ -1,7 +1,17 @@
+/**
+ * Main.java
+ * @author Oliver Szabo
+ * @since 10/19/2023
+ * 
+ * The main class for my Battleship program serves as a "menu," 
+ * with an introduction, rules, and a place from which 
+ * the user can launch either a normal game (n) or a fast game (f).
+ */
+
 import java.util.Scanner;
 
-public class Main { // Main class to run Battleship's methods (split up classes to make it more organized)
-    public static void main(String[] args) { // Main method, to run when Main is built and executed
+public class Main {
+    public static void main(String[] args) { 
         Scanner scanString = new Scanner(System.in); // create scanner to scan string;two scanners b/c it gets buggy with num and string used under one.
 
         Battleship game = new Battleship(); // create new battleship instance (battleship is where all the methods are stored, less cluttered)

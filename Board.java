@@ -1,8 +1,20 @@
-public class Board { // the Board class is a computer representation of a board upon which ships are placed.
+/**
+ * Board.java
+ * 
+ * @author Oliver Szabo
+ * @since 10/19/2023
+ * 
+ * This class represents the boards which players use to make guesses.
+ * The class contains methods for getting side lengths, returning indicators for guessing purposes,
+ * and setting indicators upon results of a guess.
+ */
+
+public class Board { 
     String[][] indicators;
     int s;
     
-    public Board(int side) { // constructs the board and specifies the side length
+    // constructs the board and specifies the side length
+    public Board(int side) { 
         s = side; // sets s variable to the side
 
         indicators = new String[s][s]; // creates indicators' size
@@ -14,11 +26,13 @@ public class Board { // the Board class is a computer representation of a board 
         }
     }
 
-    public int getSideLength() { // easy getter that returns side length
+    // easy getter that returns side length
+    public int getSideLength() { 
         return s;
     }
 
-    public void printBoard () { // prints the board out--this one is used a lot!
+    // prints the board out--this one is used a lot!
+    public void printBoard () { 
         System.out.print("   "); // space in front to line everything up
 
         for (int i = 1; i <= s; i++) {
@@ -44,11 +58,13 @@ public class Board { // the Board class is a computer representation of a board 
         System.out.println("");
     }
 
-    public void setIndicator (int x, int y, String ind) { // sets indicator according to arguments
+    // sets indicator according to arguments
+    public void setIndicator (int x, int y, String ind) {
         indicators[x-1][y-1] = ind;
     }
 
-    public String getIndicator (int x, int y) { // returns indicator according to arguments
+    // returns indicator according to arguments
+    public String getIndicator (int x, int y) { 
         return indicators[x-1][y-1];
     }
 }
