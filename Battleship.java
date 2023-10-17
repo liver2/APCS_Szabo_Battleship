@@ -195,8 +195,8 @@ public class Battleship { // The main "hub" where most methods that work with th
     public void guess(Board board, Board conjBoard, Ship[] s, int len, String p) { // goes through the guessing procedure (player input, calls method to process guess, etc.)
         // board (p1Guess, p2Guess) is the Board of the one guessing. 
         // conjBoard (p2Board, p1Board) is the board of the one receiving the hit. ships are enemy ships
-        int x; // for inputs
-        int y; // for inputs
+        int x = 0; // for inputs
+        int y = 0; // for inputs
 
         System.out.println("Here is your board, Player " + p + ":");
         board.printBoard();
