@@ -1,11 +1,22 @@
+/**
+ * Battleship.java
+ * 
+ * @author Oliver Szabo
+ * @since 10/19/2023
+ * 
+ * This class contains methods to execute the Normal Game and the Fast Game. 
+ * It also holds the methods for ship placement, guessing, and checking if someone has won.
+ */
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Battleship { // The main "hub" where most methods that work with the Board and Ship classes reside and are called upon in the normalGame() and fastGame() methods
+public class Battleship {
     private Scanner scanNum = new Scanner(System.in); // two scanners for different types
     private Scanner scanString = new Scanner(System.in); // reduce to 1 scanner?
 
-    public void normalGame() { // Uses different methods within the Battleship class to structure and run normalGame()
+    // Uses different methods within the Battleship class to structure and run normalGame()
+    public void normalGame() { 
         Board p1Board = new Board(10); // just like the battleship game, there should be 4 boards; 2 for players checking where they want their ships to go
         Board p1Guess = new Board(10); // and 2 for checking & tracking guesses on the other board
         Board p2Board = new Board(10);
@@ -39,7 +50,8 @@ public class Battleship { // The main "hub" where most methods that work with th
 
         // Guessing phase
 
-        while (true) { // don't worry, this won't infinitely loop!! using break when someone has won
+        // don't worry, this won't infinitely loop!! using break when someone has won
+        while (true) { 
             guess(p1Guess, p2Board, p2, 5, "1"); // guessing & checking if guess hits
 
             if (winCheck(p2, 5) == true) {
@@ -58,7 +70,8 @@ public class Battleship { // The main "hub" where most methods that work with th
         }
     }
 
-    public void fastGame() { // Uses different methods within the Battleship class to structure and run fast game
+    // Uses different methods within the Battleship class to structure and run fast game
+    public void fastGame() { 
         int counter = 0; // counter to check score
 
         Board aiBoard = new Board(8); // two boards: one for the ai to place...
@@ -71,6 +84,10 @@ public class Battleship { // The main "hub" where most methods that work with th
         }
 
         System.out.println("Please wait while the computer generates ships...");
+
+        for (int i = 0; i < 3; i++) {
+            aiShip[i] = new Ship();
+        }
 
         randomPlace(aiShip[0], aiBoard, 2); // repeatedly generates random ship configurations until the system finds one that is valid.
         randomPlace(aiShip[1], aiBoard, 3);
@@ -89,7 +106,8 @@ public class Battleship { // The main "hub" where most methods that work with th
         }
     }
 
-    public void promptShipPlacement(int len, Board board, Ship ship, String ind) { // Method that goes through the ship placement process
+    // Method that goes through the ship placement process
+    public void promptShipPlacement(int len, Board board, Ship ship, String ind) { 
         int x = 0; // for ship args
         int y = 0; // for ship args
         String orientation; // to set the parameters of the ship, we should declare a local variable specific to the function
@@ -137,8 +155,9 @@ public class Battleship { // The main "hub" where most methods that work with th
         board.printBoard();
     }
 
-    public boolean shipPlacementCheck(int x, int y, int len, String orientation, Board board) { // this method basically calculates the positions of a sample boat... 
-        // ...and checks whether or not those positions overlap/go off the board
+    // this method basically calculates the positions of a sample boat... 
+    // ...and checks whether or not those positions overlap/go off the board
+    public boolean shipPlacementCheck(int x, int y, int len, String orientation, Board board) { 
         int[][] pos = new int[len][3]; // local variable/array "pos" used to "preview" the ship's x and y coordinates
         pos[0][0] = x; // 
         pos[0][1] = y;
@@ -164,7 +183,8 @@ public class Battleship { // The main "hub" where most methods that work with th
         return true;
     }
     
-    public void shotCheck(int x, int y, Board board, Board conjBoard, Ship[] s, int len, String p) { // Feedback for shots, and also updates the indicator accordingly
+    // Feedback for shots, and also updates the indicator accordingly
+    public void shotCheck(int x, int y, Board board, Board conjBoard, Ship[] s, int len, String p) { 
         if (conjBoard.getIndicator(x,y).equals("a") || conjBoard.getIndicator(x,y).equals("b") 
          || conjBoard.getIndicator(x,y).equals("c") || conjBoard.getIndicator(x,y).equals("d") || conjBoard.getIndicator(x,y).equals("e")) { // for Board board...
             // ...checks if the board it is matched up with, conjBoard, has a ship at the position on which the gues was
@@ -192,9 +212,10 @@ public class Battleship { // The main "hub" where most methods that work with th
         }
     }
 
-    public void guess(Board board, Board conjBoard, Ship[] s, int len, String p) { // goes through the guessing procedure (player input, calls method to process guess, etc.)
-        // board (p1Guess, p2Guess) is the Board of the one guessing. 
-        // conjBoard (p2Board, p1Board) is the board of the one receiving the hit. ships are enemy ships
+    // goes through the guessing procedure (player input, calls method to process guess, etc.)
+    // board (p1Guess, p2Guess) is the Board of the one guessing. 
+    // conjBoard (p2Board, p1Board) is the board of the one receiving the hit. ships are enemy ships
+    public void guess(Board board, Board conjBoard, Ship[] s, int len, String p) { 
         int x = 0; // for inputs
         int y = 0; // for inputs
 
@@ -222,7 +243,8 @@ public class Battleship { // The main "hub" where most methods that work with th
         shotCheck(x, y, board, conjBoard, s, len, p);
     }
 
-    public void randomPlace(Ship argShip, Board board, int len) { // procedure to randomly place ships during a fast game
+    // method for randomly placing ships on the board in fast game
+    public void randomPlace(Ship argShip, Board board, int len) {
         int x;
         int y;
         int o;
@@ -243,7 +265,8 @@ public class Battleship { // The main "hub" where most methods that work with th
         } 
     }
 
-    public boolean winCheck(Ship[] s, int len) { // method to check for if someone wins
+    // method to check for if someone wins
+    public boolean winCheck(Ship[] s, int len) { 
         for (int i = 0; i < len; i++) {
             if (s[i].getSunk() != true) {
                 return false;

@@ -1,6 +1,18 @@
+/**
+ * Ship.java
+ * 
+ * @author Oliver Szabo
+ * @since 10/19/2023
+ * 
+ * This class emulates the ships which the players physically place and guess the positions.
+ * The class contains a method to set the Ship Parameters, which are not initialized,
+ * and contains basic methods to return its parameters,
+ * as well as a method to detect where a successful guess hits the ship.
+ */
+
 import java.util.Scanner;
 
-public class Ship { // Ship class emulates the physical "ships" that the player places on the Board
+public class Ship { 
     int length; // ship length
     int[][] position; // x position, y position, status
     boolean sunk = false; // sunk status
@@ -17,7 +29,8 @@ public class Ship { // Ship class emulates the physical "ships" that the player 
         }
     }
 
-    public void shot (int x, int y) { // checks where the shot hit
+    // checks where the shot hit
+    public void shot (int x, int y) { 
         int counter = 0; // counter: if the ship is still alive the counter != 0 and thus, ship is still alive (true)
 
         for (int k = 0; k < length; k++) {
@@ -35,15 +48,18 @@ public class Ship { // Ship class emulates the physical "ships" that the player 
         }
     }
 
-    public int getPosition(int x, int y) { // gets position from 2d array acc. to arguments
+    // gets position from 2d array acc. to arguments
+    public int getPosition(int x, int y) { 
         return position[x][y];
     }
 
-    public int getLength() { // returns length of the ship
+    // returns length of the ship
+    public int getLength() { 
         return length;
     }
 
-    public boolean getSunk() { // returns status of the ship. if the ship is sunk "true" and if not "false"
+    // returns status of the ship. if the ship is sunk "true" and if not "false"
+    public boolean getSunk() { 
         return sunk;
     }
 }
