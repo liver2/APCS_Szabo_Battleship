@@ -207,6 +207,8 @@ public class Battleship {
             }
 
             board.printBoard();
+        } else if (conjBoard.getIndicator(x,y).equals("X") || conjBoard.getIndicator(x,y).equals("S")) { 
+            System.out.println("You already hit that ship, Player " + p + "! That shot went to waste.");
         } else {
             System.out.println("Player " + p + ", You missed.");
 
