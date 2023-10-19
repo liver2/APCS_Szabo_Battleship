@@ -26,7 +26,7 @@ public class Battleship {
         Ship[] p2 = new Ship[5]; // for player 2
 
         for (int i = 0; i < 5; i++) {
-            p1[i] = new Ship();
+            p1[i] = new Ship(); // actually initializes new ship
             p2[i] = new Ship();
         }
 
@@ -114,20 +114,23 @@ public class Battleship {
 
         do {
             do {
-                try {
+                try { // catches error and keeps program running
                     System.out.println("Please specify an X coordinate for your ship with length " + len + ".");
                     x = scanNum.nextInt();
                 } catch (InputMismatchException e) {
                     System.out.println("Please input a number from 1 to 10.");
+                    scanNum.nextLine(); // prevents scanner from accidentally scanning another zero, letting the user input again
                 }
-            } while (!(x >= 0 && x <= board.getSideLength())); // do while loop uses "not" conditional so that the condition to succeed is more clear
+            } while (!(x > 0 && x <= board.getSideLength())); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
             do {
                 try {
                     System.out.println("Please specify a Y coordinate for your ship with length " + len + ".");
                     y = scanNum.nextInt();
                 } catch (InputMismatchException e) {
+                    y = -1;
                     System.out.println("Please input a number from 1 to 10.");
+                    scanNum.nextLine();
                 }
             } while (!(y >= 0 && y <= board.getSideLength()));
 
@@ -228,6 +231,7 @@ public class Battleship {
                 x = scanNum.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Please input a number from 1 to 10.");
+                scanNum.nextLine();
             }
         } while (!(x >= 0 && x <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
 
@@ -237,6 +241,7 @@ public class Battleship {
                 y = scanNum.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Please input a number from 1 to 10.");
+                scanNum.nextLine();
             }
         } while (!(y >= 0 && y <= 10)); // do while loop uses "not" conditional so that the condition to succeed is more clear
 

@@ -33,7 +33,7 @@ public class Main {
                 System.out.println("In Regular mode, you and a friend will each place 5 ships — whose positions the other will then try to guess — on a 10x10 board.");
                 System.out.println("Be aware that North is up and East is right!");
                 System.out.println("Also, X is horizontal and Y is vertical.");
-                System.out.println("The ships will be lengths 2, 3, 3, 4, and 5.");
+                System.out.println("The ships will be lengths 2, 3, 3, 4, and 5; this means they will occupy spaces horizontally or vertically next to each other.");
                 System.out.println("Ships cannot be placed diagonally; only horizontally and vertically. They cannot extend off the board, and they cannot overlap.");
                 System.out.println("After you've placed your ships, you and your friend will take turns guessing the positions of each others' ships.");
                 System.out.println("You will do this using coordinates.");
