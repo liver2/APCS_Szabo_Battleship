@@ -11,11 +11,13 @@ public class Main { // Main class to run Battleship's methods (split up classes 
         System.out.println("Welcome to Battleship!");
         System.out.println("For this version of Battleship, you can choose 2 modes: Fast and Regular.");
         System.out.println("Let me explain the rules.\n"); // Places new line
-        System.out.println("In Regular mode, you and a friend will each place 5 ships — whose position the other will then try to guess — on a 10x10 board.");
+        System.out.println("In Regular mode, you and a friend will each place 5 ships — whose positions the other will then try to guess — on a 10x10 board.");
         System.out.println("Be aware that North is up and East is right!");
+        System.out.println("Also, X is horizontal and Y is vertical.");
         System.out.println("The ships will be lengths 2, 3, 3, 4, and 5.");
         System.out.println("Ships cannot be placed diagonally; only horizontally and vertically. They cannot extend off the board, and they cannot overlap.");
         System.out.println("After you've placed your ships, you and your friend will take turns guessing the positions of each others' ships.");
+        System.out.println("You will do this using coordinates.");
         System.out.println("Hitting one part of a ship does not mean it's sunk. For example, if a ship is length 5, you need to hit all 5 of its segments to sink it.");
         System.out.println("The indicator on your guessing board, S, will appear where the other person's ship used to be when you've sunk a ship.");
         System.out.println("If you can sink your friend's 5 ships, you win! Vice versa; whoever gets all their five ships sunk first loses.\n");

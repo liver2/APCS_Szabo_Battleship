@@ -202,7 +202,7 @@ public class Battleship { // The main "hub" where most methods that work with th
         board.printBoard();
 
         do {
-            try {
+            try { // upon error, catches the error and keeps program from crashing
                 System.out.println("What is the x-coordinate of the square you wish to fire a missle at?");
                 x = scanNum.nextInt();
             } catch (InputMismatchException e) {
